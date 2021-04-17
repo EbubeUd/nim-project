@@ -1,4 +1,4 @@
-import sequtils, sugar, strutils
+import sequtils, sugar, strutils, os
 
 
 #PROCEDURES AND OBJECTS
@@ -225,22 +225,61 @@ when false:
     list.repr.echo
     listArr.repr.echo
 
+when false:
+
+    var list = newSeq[int] (4)
+
+    for i in 0..<10:
+        if i < 3:
+            list[i] = i
+        elif i == 3:
+            list[i] = i
+        else:
+            list.add(i)
+
+    let age = if true : 2 else : 1
+    age.echo
+
+    var i = 0
+    while i < 10:
+        echo i
+        i.inc
+
+#BLOCKS AND ITERATORS
+when false: 
+    block Ebube:
+        var trainingIntensity = 0
+        while true:
+            #Training Process
+            trainingINTENSITY.inc
+            if training_intensity > 10:
+                """Lol... This is the dirtiest piece I have written. 
+                But I have reached the threshold :)""".unindent.echo
+                break Ebube
+
+    iterator values() : int =
+        for i in 0..<10:
+            yield i
+
+    for value in values():
+        echo value
+
+    for file in walkFiles("*.nim"):
+        echo file
 
 
-var list = newSeq[int] (4)
+#SETS
+when true:    
+    let collection = {'a'..'z'}
+    let sub = {'a', 'c', 'e', 'f'}
+    let intr = collection * sub
+    intr.echo
+    let val = 'a' in collection
+    val.echo
 
-for i in 0..<10:
-    if i < 3:
-        list[i] = i
-    elif i == 3:
-        list[i] = i
-    else:
-        list.add(i)
 
-let age = if true : 2 else : 1
-age.echo
+while true:
+    let names = @["Ebube", "Sered", "Ifeanyi", "Ud"]
 
-var i = 0
-while i < 10:
-    echo i
-    i.inc
+    for i, name in names:
+        echo "Name at ", i , " is ", name
