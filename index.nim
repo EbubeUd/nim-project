@@ -1,7 +1,7 @@
 import sequtils, sugar, strutils
 
 
-#PROCESSES AND OBJECTS
+#PROCEDURES AND OBJECTS
 when false:
     echo "This is my first nim project :)"
 
@@ -119,13 +119,83 @@ when false:
 
 
 
-#VAR AND STROOPING
+#VAR AND STROOPING (Strooping is the act of using keywords as variable names by appending an prepending them with `)
+when false:
+    var
+        name = "Ebube"
+        age = 24
+        hubby = @["Reading", "Programming"]
+        space = " "
+        fooBar = "Foo Bar"
+        `var` = "Var" 
+    echo name,space,age,space,hubby,foobar,space,`var`
 
-var
-    name = "Ebube"
-    age = 24
-    hubby = @["Reading", "Programming"]
-    space = " "
-    fooBar = "Foo Bar"
-    `var` = "Var"
-echo name,space,age,space,hubby,foobar,space,`var`
+
+#ADVANCED PROCEDURES
+when false:
+    proc concatenate(name : string, id : uint) : string = 
+        result = name & $id
+
+    proc buildstring(str: varargs[string]) : string =
+        for name in str:
+            result.add(name & " ")
+
+    proc add(values: varargs[int]) : int = 
+        for value in values:
+            result += value
+
+    proc add(values: varargs[string]) : string =
+        for value in values:
+            result &= value
+
+    proc task(day: string) : string =
+        case day:
+        of "Monday":
+            result= "Stand up meeting with the Dev team"
+        of "Tuesday":
+            result = "Readup"
+        of "Wednesday":
+            result = "Code"
+        of "Thursday":
+            "Code".echo
+            result = "Code"
+        of "Friday":
+            "Turn Up".echo
+            result = "Turn Up"
+            
+
+when false:
+    let numbers = @[1,2,3,4,5,6,7,8,9,10]
+    let odd = numbers.filter( (x: int) -> bool => x mod 2 != 0)
+    let even = numbers.filter((x : int) -> bool =>  x mod 2 == 0)
+    odd.echo
+    even.echo
+
+
+when false:
+    
+    var word = concatenate("Ebube", 1)
+    word.echo
+
+    let sentence = buildstring("I", "Like", "Reading", "and", "programming")
+    sentence.echo
+
+    let solution = add(1,2,3,4)
+    solution.echo
+
+    let addWords = add($1,$2,$3,$4)
+    addWords.echo
+
+    discard task("Friday")
+
+
+    discard concatenate("Sered", 2)
+
+
+proc isValid(str : string, valid : proc (x : string) : bool) =
+    if valid(str):
+        echo "valid"
+    else:
+        echo "Invalid"
+
+isValid("Ebube",  (x : string) -> bool => true)
