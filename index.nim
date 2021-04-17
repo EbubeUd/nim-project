@@ -192,10 +192,55 @@ when false:
     discard concatenate("Sered", 2)
 
 
-proc isValid(str : string, valid : proc (x : string) : bool) =
-    if valid(str):
-        echo "valid"
-    else:
-        echo "Invalid"
+when false:   
+    proc isValid(str : string, valid : proc (x : string) : bool) =
+        if valid(str):
+            echo "valid"
+        else:
+            echo "Invalid"
 
-isValid("Ebube",  (x : string) -> bool => true)
+    isValid("Ebube",  (x : string) -> bool => true)
+
+
+
+#ARRAYS AND SEQUENCES
+
+when false:
+    var listArr : array[10, int]
+    var list : array[-10..0, int]
+    list[-10] = -10
+
+    for i in 0..<10:
+        listArr[i] = i mod 2
+
+    for i in -10..<1:
+        list[i] = i
+
+
+    for i in list:
+        echo i
+
+    for i in list.low..list.high:
+        echo i
+    list.repr.echo
+    listArr.repr.echo
+
+
+
+var list = newSeq[int] (4)
+
+for i in 0..<10:
+    if i < 3:
+        list[i] = i
+    elif i == 3:
+        list[i] = i
+    else:
+        list.add(i)
+
+let age = if true : 2 else : 1
+age.echo
+
+var i = 0
+while i < 10:
+    echo i
+    i.inc
