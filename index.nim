@@ -278,8 +278,19 @@ when true:
     val.echo
 
 
-while true:
+when true:
     let names = @["Ebube", "Sered", "Ifeanyi", "Ud"]
 
     for i, name in names:
         echo "Name at ", i , " is ", name
+
+
+#EXCEPTIONS
+
+proc err() =
+    raise newException(IOError, "An Unexpected Error Occured")
+
+proc function() = 
+    err()
+
+function()
