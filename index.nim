@@ -287,10 +287,65 @@ when true:
 
 #EXCEPTIONS
 
-proc err() =
+
+
+proc ioError() =
     raise newException(IOError, "An Unexpected Error Occured")
 
-proc function() = 
-    err()
+proc osError() = 
+    raise newException(OSError, "There was an error with your os")
 
-function()
+proc unknownError() =
+    raise newException(KeyError, "Key Error")
+
+proc function() = 
+    try:
+        unknownError()
+    except IOError:
+        echo "An IO Error Occured"
+    except OSError:
+        echo "there was an error with your OS"
+    except:
+        echo "An unexpected error occured because ", getCurrentExceptionMsg()
+
+
+type
+    Boy = object
+        name : string
+        age : int
+        height : int
+
+    BoyRef = ref Boy
+
+var person = BoyRef(name: "ebube", age: 24, height: 10)
+
+proc setPerson(person: BoyRef) =
+    person.name = "Ebube"
+
+setPerson(person)
+
+echo person.name
+
+let number : int = 8
+let boy : Boy = Boy(name: "Ebube", age: 21)
+number.echo
+boy.echo
+
+type
+    Lion = tuple
+        name : string
+        weight: int
+    Tiger = tuple[name: string, weight: int]
+
+
+let lion : Lion = (name: "Tiger", weight: 100)
+let tiger: Tiger = ("Tiger", 100)
+
+var lionName, tigerName : string
+var lionWeight, tigerWeight: int
+
+(lionName, lionWeight) = lion
+(tigerName, tigerWeight) = tiger
+
+lionName.echo
+    
