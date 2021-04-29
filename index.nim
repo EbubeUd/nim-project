@@ -1,4 +1,4 @@
-import sequtils, sugar, strutils, os
+import sequtils, sugar, strutils, os, tables, hashes, sets, algorithm
 
 
 #PROCEDURES AND OBJECTS
@@ -352,20 +352,62 @@ when false:
     lionName.echo
     
 
-type
-    Languages = enum
-        En,
-        Igbo,
-        Hausa,
-        Yoruba
-    
-    Subject {.pure.} = enum
-        Chemistry
-        Physics
-        Biology
+    type
+        Languages = enum
+            En,
+            Igbo,
+            Hausa,
+            Yoruba
+        
+        Subject {.pure.} = enum
+            Chemistry
+            Physics
+            Biology
+        Animal = object
+            name : string
 
 
-let language : Languages = Languages.En
-let subject : Subject = Subject.Chemistry
-language.echo
-subject.echo
+    let language : Languages = Languages.En
+    let subject : Subject = Subject.Chemistry
+    language.echo
+    subject.echo
+
+
+    #Hash Tables
+    var animalsAges = toTable[string, int]({
+        "Dog": 3,
+        "Cat": 3,
+        "Cock": 4,
+        "Ape": 3
+    })
+
+    proc hash(animal : Animal) : Hash =
+        result  = hash(animal.name)
+        result = !$result
+
+    var animalMap = toTable[Animal, int]({
+        Animal(name: "Dog") : 3
+    })
+
+    animalMap[Animal(name: "Cat")] = 3
+    echo animalMap[Animal(name: "Cat")]
+
+    var hashSet = toHashSet(["Ebube", "Sered", "Ud", "Ebube"])
+    if "Ifeanyi" notin hashSet:
+        echo "access denied"
+    else :
+        echo "Access Granted"
+
+
+#ALGORITHMS
+#Sort
+var numbers = @[2,1,4,3,56,5,8,7,0,9]
+numbers.sort(system.cmp[int])
+echo numbers
+
+var namesSort = ["Ebube", "Boy", "Ifeanyi", "Called", "Ud", "A"]
+let sorted = namesSort.sorted(system.cmp[string])
+namesSort.echo
+sorted.echo
+
+
